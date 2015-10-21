@@ -1,5 +1,5 @@
 # Redesign Localhost Index
-i am not a big fun, Default styling of localhost directory index page. So i created my own version. If you like me then feel free to use.
+i am not a big fun, Default styling of localhost directory index page. So i created my own version. If you like it, then feel free to use.
 
 #Before 
 - - -
