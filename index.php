@@ -1,7 +1,9 @@
 <?php
-$output ='';
-$rootDir = '/Applications/XAMPP/htdocs/';
+//Change to Your Localhost root Directory Path
+$rootDir = '/Users/siamon/Sites/';
+
 $folderCount = $fileCount = 0;
+//Hide Folders
 $not_allowed = array('.', '..', 'css','img','phpMyAdmin','DS_Store');
 ?>
 <!doctype html>
@@ -19,61 +21,65 @@ $not_allowed = array('.', '..', 'css','img','phpMyAdmin','DS_Store');
       <div class="container">
 
         <div class="panel-group" id="accordion">
+              <?php
+                  foreach(glob($rootDir.'*', GLOB_ONLYDIR) as $dir):
 
-          <?php
+                    $url = basename($dir);
 
-                   foreach(glob($rootDir.'*', GLOB_ONLYDIR) as $dir)
-                   {
-                     $url = basename($dir);
+                    if (!in_array($url, $not_allowed)):
+              ?>
 
-                     if (!in_array($url, $not_allowed)) {
+                    <div class="panel">
+                      <div class="panel-heading">
+                       <a href="<?php echo $url;?>">
+                         <span class="glyphicon glyphicon-fire"></span>
+                         <?php echo $url;?>
+                      </a>
+                      <a class="pull-right"data-toggle="collapse" data-parent="#accordion" href="#<?php echo $url;?>">
+                        <span class="glyphicon glyphicon-circle-arrow-down"></span>
+                      </a>
+                      </div>
+                      <div id="<?php echo basename($dir);?>" class="panel-collapse collapse">
+                      <div class="list-group">
 
-
-                     $output  ="<div class=\"panel\">";
-                     $output .="<div class=\"panel-heading\">";
-                     $output .="<a href=\"$url\">";
-                     $output .= "<span class=\"glyphicon glyphicon-fire\"></span>";
-                     $output .= $url;
-                     $output .= "</a>";
-                     $output .= "<a class=\"pull-right\"data-toggle=\"collapse\" data-parent=\"#accordion\" href=\"#$url\"> <span class=\"glyphicon glyphicon-circle-arrow-down\"></span> </a>";
-                     $output .= "</a>";
-                     $output .="</div>";
-                     $output .="<div id=".basename($dir)." class=\"panel-collapse collapse\">";
-                     $output .="<div class=\"list-group\">";
-                     if ($handle = opendir($dir)) {
-                            while (false !== ($entry = readdir($handle))) {
-                                if ($entry != "." && $entry != ".." && $entry != ".DS_Store") {
-                                    if (is_dir($entry)) {
-
-                                      $output .= "<a href=".basename($dir)."/".$entry." class=\"list-group-item folder\">";
-                                      $output .= "<span class=\"glyphicon glyphicon-folder-close\"></span>";
-                                      $output .="Folder => ".$entry;
-                                      $output .="</a>";
-                                        $folderCount++;
-                                    } else {
-                                      $output .= "<a href=".basename($dir)."/".$entry." class=\"list-group-item file\">";
-                                      $output .= "<span class=\"glyphicon glyphicon-file\"></span>";
-                                      $output .="File => ".$entry;
-                                      $output .="</a>";
-                                        $fileCount++;
-                                    }
-                                }
-                            }
-                            $output .="<div class=\"panel-footer\">";
-                            $output .=  "Total Folder : ". $folderCount;
-                            $output .=" ";
-                            $output .=  "Total File : ". $fileCount;
+                     <?php
+                      if ($handle = opendir($dir)):
+                           while (false !== ($entry = readdir($handle))) {
+                               if ($entry != "." && $entry != ".." && $entry != ".DS_Store") {
+                                   if (is_dir($entry)) {
+                      ?>
+                                 <a href="<?php echo basename($dir)?>"/"<?php echo $entry;?>" class="list-group-item folder">
+                                    <span class="glyphicon glyphicon-folder-close"></span>
+                                     Folder => <?php echo $entry;?>
+                                  </a>
+                                <?php
+                                  $folderCount++;
+                                   } else {
+                                ?>
+                                <a href="<?php echo basename($dir);?>/<?php echo $entry;?>" class="list-group-item file">
+                                 <span class="glyphicon glyphicon-file"></span>
+                                  File => <?php echo $entry; ?>
+                                  </a>
+                                <?php
+                                       $fileCount++;
+                                   }
+                               }
+                           }
+                          ?>
+                          <div class="panel-footer">
+                           Total Folder : <?php echo $folderCount; ?>
+                           Total File : <?php echo $fileCount; ?>
+                           <?php
                             closedir($handle);
-                        }
+                            endif;
+                          ?>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
 
-                      $output .="</div>";
-                      $output .="</div>";
-                      $output .="</div>";
-                      $output .="</div>";
-                      print_r($output);
-                    }
-                  }
-            ?>
+         <?php endif; ?>
+         <?php endforeach;?>
         </div>
       </div>
     </div>
