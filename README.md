@@ -4,16 +4,16 @@ i am not a big fun, Default styling of localhost directory index page. So i crea
 #Before 
 - - -
 
-![image](http://oswapp.com/uploads/b/Screen%20Shot%202015-10-20%20at%205.25.07%20PM.jpg)
+![image](http://oswapp.com/uploads/b/old-localhost.jpg)
 
 #After
 - - -
 
-![image](http://oswapp.com/uploads/b/Screen%20Shot%202015-10-20%20at%205.33.22%20PM.jpg)
+![image](http://oswapp.com/uploads/b/new-localhost.jpg)
 #Installing
 - - -
 
-1. Download the repository and move index.php and css folder  to your localhost directory. Replace your exting index file with new index.php file, if you have one.
+1. Download the repository and move index.php and css folder  to your localhost directory. Replace your exiting index file with new index.php file, if you have one.
 
 2. Edit index.php file.
 
